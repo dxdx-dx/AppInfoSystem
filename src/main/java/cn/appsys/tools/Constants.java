@@ -6,7 +6,7 @@ package cn.appsys.tools;
 public class Constants {
 
     //页面容量
-    public static final int PAGE_SIZE = 8;
+    public static final int PAGE_SIZE = 6;
     //session
     public static final String USER_SESSION = "userSession";
     public static final String DEVUSER_SESSION = "devUserSession";

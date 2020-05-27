@@ -50,7 +50,7 @@
 
                     <div class="separator">
                         <div>
-                            <p>©2016 All Rights Reserved. </p>
+                            <p> ©2020 Matrix Create.</p>
                         </div>
                     </div>
                 </form>

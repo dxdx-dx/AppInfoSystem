@@ -14,7 +14,7 @@
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
-                <form method="post" action="list">
+                <form method="get" action="list">
                     <input type="hidden" name="pageIndex" value="1"/>
                     <ul>
                         <li>
@@ -22,7 +22,7 @@
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">软件名称</label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <input name="querySoftwareName" type="text" class="form-control col-md-7 col-xs-12"
-                                           value="${querySoftwareName }">
+                                           value="${querySoftwareName}">
                                 </div>
                             </div>
                         </li>
@@ -33,7 +33,7 @@
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <select name="queryFlatformId" class="form-control">
                                         <c:if test="${flatFormList != null }">
-                                            <option value="">--请选择--</option>
+                                            <option value="0">--请选择--</option>
                                             <c:forEach var="dataDictionary" items="${flatFormList}">
                                                 <option
                                                         <c:if test="${dataDictionary.valueId == queryFlatformId }">selected="selected"</c:if>
@@ -204,7 +204,7 @@
                         <div class="col-sm-5">
                             <div class="dataTables_info" id="datatable-responsive_info"
                                  role="status" aria-live="polite">共${pages.totalCount }条记录
-                                ${pages.currentPageNo }/${pages.totalPageCount }页
+                                ${pages.currentPageNo }/${pages.totalPageNo }页
                             </div>
                         </div>
                         <div class="col-sm-7">
@@ -223,14 +223,14 @@
                                                 tabindex="0">上一页</a>
                                         </li>
                                     </c:if>
-                                    <c:if test="${pages.currentPageNo < pages.totalPageCount }">
+                                    <c:if test="${pages.currentPageNo < pages.totalPageNo }">
                                         <li class="paginate_button "><a
                                                 href="javascript:page_nav(document.forms[0],${pages.currentPageNo+1 });"
                                                 aria-controls="datatable-responsive" data-dt-idx="1"
                                                 tabindex="0">下一页</a>
                                         </li>
                                         <li class="paginate_button next"><a
-                                                href="javascript:page_nav(document.forms[0],${pages.totalPageCount });"
+                                                href="javascript:page_nav(document.forms[0],${pages.totalPageNo });"
                                                 aria-controls="datatable-responsive" data-dt-idx="7"
                                                 tabindex="0">最后一页</a>
                                         </li>

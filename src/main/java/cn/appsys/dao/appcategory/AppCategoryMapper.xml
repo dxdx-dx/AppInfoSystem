@@ -3,5 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.appsys.dao.appcategory.AppCategoryMapper">
-
+    <select id="getCategoryLevel1" resultType="AppCategory">
+        SELECT `id`,`categoryCode`,`categoryName` FROM `app_category` WHERE ISNULL(`parentId`)
+    </select>
+    <select id="getCategoryLevel2" parameterType="Integer" resultType="AppCategory">
+        SELECT `id`,`categoryCode`,`categoryName` FROM `app_category` WHERE `parentId`=#{parentId}
+    </select>
 </mapper>

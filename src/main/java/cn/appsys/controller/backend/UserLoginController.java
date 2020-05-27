@@ -71,4 +71,19 @@ public class UserLoginController {
         }
     }
 
+    /**
+     * 注销
+     *
+     * @return java.lang.String
+     * @author Matrix
+     * @date 2020/5/19 8:59
+     */
+    @RequestMapping("/logout")
+    public String logout(HttpSession httpSession) {
+        if (httpSession.getAttribute(Constants.USER_SESSION) != null) {
+            httpSession.removeAttribute(Constants.USER_SESSION);
+        }
+        return "backendlogin";
+    }
+
 }

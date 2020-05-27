@@ -51,7 +51,7 @@
 				<div class="profile">
 					<div class="profile_pic">
 						<img
-								src="${pageContext.request.contextPath }/statics/images/img.jpg"
+								src="${pageContext.request.contextPath }/statics/images/picture.jpg"
 								alt="..." class="img-circle profile_img">
 					</div>
 					<div class="profile_info">
@@ -123,13 +123,13 @@
 						<li class=""><a href="javascript:;"
 										class="user-profile dropdown-toggle" data-toggle="dropdown"
 										aria-expanded="false"> <img
-								src="${pageContext.request.contextPath }/statics/images/img.jpg"
+								src="${pageContext.request.contextPath }/statics/images/picture.jpg"
 								alt="">${devUserSession.devCode } <span
 								class=" fa fa-angle-down"></span> </a>
 							<ul class="dropdown-menu dropdown-usermenu pull-right">
 								<li><a
 										href="${pageContext.request.contextPath }/dev/logout"><i
-										class="fa fa-sign-out pull-right"></i> Log Out</a>
+										class="fa fa-sign-out pull-right"></i>退出</a>
 								</li>
 							</ul>
 						</li>
