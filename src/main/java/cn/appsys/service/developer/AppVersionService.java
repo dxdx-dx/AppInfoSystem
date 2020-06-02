@@ -9,9 +9,11 @@ import java.util.List;
  * @date 2020/5/16 3:01
  */
 public interface AppVersionService {
+    //删除apk文件
+    boolean deleteApkFile(Integer id) throws Exception;
 
     //新增app版本信息，并更新app_info表的versionId字段
-    public boolean appsysadd(AppVersion appVersion) throws Exception;
+    boolean appsysadd(AppVersion appVersion) throws Exception;
 
     //修改app信息（修改状态）
     int modifystatus(Integer status, Integer id);

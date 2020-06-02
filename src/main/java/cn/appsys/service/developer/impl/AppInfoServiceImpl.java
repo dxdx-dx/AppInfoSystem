@@ -23,6 +23,21 @@ public class AppInfoServiceImpl implements AppInfoService {
     @Resource
     private AppVersionMapper appVersionMapper;
 
+    /**
+     * 删除logo图片
+     */
+    @Override
+    public boolean deleteAppLogo(Integer id) throws Exception {
+        boolean flag = false;
+        if (appInfoMapper.deleteAppLogo(id) > 0) {
+            flag = true;
+        }
+        return flag;
+    }
+
+    /**
+     * 根据id查询app基础信息
+     */
     @Override
     public AppInfo appinfo(int id) {
         return appInfoMapper.appinfo(id);
@@ -108,7 +123,9 @@ public class AppInfoServiceImpl implements AppInfoService {
     /**
      * 上架
      */
-    private void onSale(AppInfo appInfo, Integer operator, Integer appInfStatus, Integer versionStatus) throws Exception {
+    private void onSale(AppInfo appInfo, Integer operator,
+                        Integer appInfStatus, Integer versionStatus)
+            throws Exception {
         offSale(appInfo, operator, appInfStatus);
         setSaleSwitchToAppVersion(appInfo, operator, versionStatus);
     }
@@ -116,7 +133,8 @@ public class AppInfoServiceImpl implements AppInfoService {
     /**
      * 下架
      */
-    private boolean offSale(AppInfo appInfo, Integer operator, Integer appInfStatus) throws Exception {
+    private boolean offSale(AppInfo appInfo, Integer operator,
+                            Integer appInfStatus) throws Exception {
         AppInfo _appInfo = new AppInfo();
         _appInfo.setId(appInfo.getId());
         _appInfo.setStatus(appInfStatus);
@@ -129,7 +147,9 @@ public class AppInfoServiceImpl implements AppInfoService {
     /**
      * 设置上下架
      */
-    private boolean setSaleSwitchToAppVersion(AppInfo appInfo, Integer operator, Integer saleStatus) throws Exception {
+    private boolean setSaleSwitchToAppVersion(AppInfo appInfo,
+                                              Integer operator, Integer saleStatus)
+            throws Exception {
         AppVersion appVersion = new AppVersion();
         appVersion.setId(appInfo.getVersionId());
         appVersion.setPublishStatus(saleStatus);
@@ -146,7 +166,8 @@ public class AppInfoServiceImpl implements AppInfoService {
     public Integer getAppinfoCount(String softwareName, Integer flatformId,
                                    Integer categoryLevel1, Integer categoryLevel2,
                                    Integer categoryLevel3, Integer status) {
-        return appInfoMapper.getAppinfoCount(softwareName, flatformId, categoryLevel1,
+        return appInfoMapper.getAppinfoCount(softwareName, flatformId,
+                categoryLevel1,
                 categoryLevel2, categoryLevel3, status);
     }
 
@@ -155,10 +176,12 @@ public class AppInfoServiceImpl implements AppInfoService {
      */
     @Override
     public List<AppInfo> getAppInfoList(String softwareName, Integer flatformId,
-                                        Integer categoryLevel1, Integer categoryLevel2,
+                                        Integer categoryLevel1,
+                                        Integer categoryLevel2,
                                         Integer categoryLevel3, Integer status,
                                         Integer pageNo, Integer pageSize) {
-        return appInfoMapper.getAppInfoList(softwareName, flatformId, categoryLevel1, categoryLevel2, categoryLevel3,
+        return appInfoMapper.getAppInfoList(softwareName, flatformId,
+                categoryLevel1, categoryLevel2, categoryLevel3,
                 status, (pageNo - 1) * pageSize, pageSize);
     }
 }

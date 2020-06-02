@@ -9,6 +9,8 @@ import java.util.List;
  * @date 2020/5/16 3:01
  */
 public interface AppInfoService {
+    //删除logo图片
+    boolean deleteAppLogo(Integer id) throws Exception;
 
     //新增app
     boolean add(AppInfo appInfo) throws Exception;

@@ -3,6 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.appsys.dao.appInfo.AppInfoMapper">
+    <!--删除logo图片-->
+    <update id="deleteAppLogo" parameterType="Integer">
+		update app_info
+			set logoPicPath=null,
+				logoLocPath = null
+			where id = #{id}
+	</update>
 
     <!--根据appId，更新最新versionId-->
     <update id="updateVersionId">

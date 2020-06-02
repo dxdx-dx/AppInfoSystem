@@ -10,6 +10,9 @@ import java.util.List;
  * @date 2020/5/16 2:30
  */
 public interface AppInfoMapper {
+    //删除logo图片
+    public int deleteAppLogo(@Param(value = "id") Integer id) throws Exception;
+
     //查询信息总条数
     Integer getAppinfoCount(@Param("softwareName") String softwareName,
                             @Param("flatformId") Integer flatformId,

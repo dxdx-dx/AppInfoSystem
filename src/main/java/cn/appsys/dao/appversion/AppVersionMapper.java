@@ -10,6 +10,8 @@ import java.util.List;
  * @date 2020/5/16 2:32
  */
 public interface AppVersionMapper {
+    //删除apk文件
+    int deleteApkFile(@Param("id") Integer id) throws Exception;
 
     //根据id查询列表
     List<AppVersion> appVersion(@Param("id") int id);

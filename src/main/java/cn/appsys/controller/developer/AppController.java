@@ -121,8 +121,7 @@ public class AppController {
                             Constants.FILEUPLOAD_ERROR_2);
                     return "developer/appinfoadd";
                 }
-                logoPicPath = request.getContextPath()
-                        + "/statics/uploadfiles/" + fileName;
+                logoPicPath = "/statics/uploadfiles/" + fileName;
                 logoLocPath = path + File.separator + fileName;
             } else {
                 request.setAttribute("fileUploadError",
@@ -271,6 +270,44 @@ public class AppController {
     }
 
     /**
+     * 删除文件
+     */
+    @RequestMapping(value = {"/delfile"}, method = {RequestMethod.GET})
+    @ResponseBody
+    public Object delFile(@RequestParam(value = "flag", required = false) String flag, @RequestParam(value = "id", required = false) String id) {
+        HashMap<String, String> resultMap = new HashMap();
+        String fileLocPath = null;
+        if (flag != null && !flag.equals("") && id != null && !id.equals("")) {
+            File file;
+            if (flag.equals("logo")) {
+                try {
+                    fileLocPath = this.appInfoService.getAppInfo(Integer.parseInt(id), (String) null).getLogoLocPath();
+                    file = new File(fileLocPath);
+                    if (file.exists() && file.delete() && this.appInfoService.deleteAppLogo(Integer.parseInt(id))) {
+                        resultMap.put("result", "success");
+                    }
+                } catch (Exception var7) {
+                    var7.printStackTrace();
+                }
+            } else if (flag.equals("apk")) {
+                try {
+                    fileLocPath = this.appVersionService.getAppVersionById(Integer.parseInt(id)).getApkLocPath();
+                    file = new File(fileLocPath);
+                    if (file.exists() && file.delete() && this.appVersionService.deleteApkFile(Integer.parseInt(id))) {
+                        resultMap.put("result", "success");
+                    }
+                } catch (Exception var6) {
+                    var6.printStackTrace();
+                }
+            }
+        } else {
+            resultMap.put("result", "failed");
+        }
+
+        return JSONArray.toJSONString(resultMap);
+    }
+
+    /**
      * 保存修改后的appVersion
      */
     @RequestMapping(value = "/appversionmodifysave", method = RequestMethod.POST)
@@ -372,7 +409,7 @@ public class AppController {
     }
 
     /**
-     * 修改app基础信息方法n
+     * 修改app基础信息方法
      */
     @RequestMapping(value = "/appinfomodifysave.html", method = RequestMethod.POST)
     public String appinfomodeifySave(AppInfo appinfo, HttpSession session, HttpServletRequest request,
@@ -386,8 +423,8 @@ public class AppController {
             // 定义上传的目标路径
 			/*String path = request.getSession().getServletContext()
 					.getRealPath("statics" + File.separator + "uploadfiles");*/
-          //  String path = "E:\\workspace_s2\\AppInfoSystem\\WebContent\\statics\\uploadfiles";
- String path ="G:\\AppInfoSystem\\src\\main\\webapp\\statics\\uploadfiles"
+            //  String path = "E:\\workspace_s2\\AppInfoSystem\\WebContent\\statics\\uploadfiles";
+            String path = "G:\\AppInfoSystem\\target\\AppInfoSystem\\statics\\uploadfiles";
             // 获取原文件名
             String oldFileName = attach.getOriginalFilename();
 
@@ -425,7 +462,7 @@ public class AppController {
                     request.setAttribute("uploadFileError", " * 上传失败！");
                     return "jsp/useradd";
                 }
-                idTocPath = request.getContextPath() + "/statics/uploadfiles/" + fileName;
+                idTocPath = "/statics/uploadfiles/" + fileName;
                 // 获取文件的的名称保存到数据库中
                 idPicPath = path + File.separator + fileName;
             } else {

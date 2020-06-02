@@ -21,6 +21,18 @@ public class AppVersionServiceImpl implements AppVersionService {
     private AppInfoMapper appInfoMapper;
 
     /**
+     * 删除apk文件
+     */
+    @Override
+    public boolean deleteApkFile(Integer id) throws Exception {
+        boolean flag = false;
+        if (appVersionMapper.deleteApkFile(id) > 0) {
+            flag = true;
+        }
+        return flag;
+    }
+
+    /**
      * 新增app版本信息，并更新app_info表的versionId字段
      */
     @Override

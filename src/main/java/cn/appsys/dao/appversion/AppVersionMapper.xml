@@ -3,7 +3,14 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.appsys.dao.appversion.AppVersionMapper">
-
+    <!--删除apk文件-->
+    <update id="deleteApkFile" parameterType="Integer">
+		update app_version
+			set apkLocPath=null,
+				downloadLink=null,
+				apkFileName=null
+			where id = #{id}
+	</update>
     <!--根据id查询信息-->
     <select id="getAppVersionById" resultType="AppVersion">
 		select * from app_version where id = #{id}
