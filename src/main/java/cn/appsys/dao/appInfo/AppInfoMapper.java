@@ -15,25 +15,54 @@ public interface AppInfoMapper {
                             @Param("flatformId") Integer flatformId,
                             @Param("categoryLevel1") Integer categoryLevel1,
                             @Param("categoryLevel2") Integer categoryLevel2,
-                            @Param("categoryLevel3") Integer categoryLevel3);
+                            @Param("categoryLevel3") Integer categoryLevel3,
+                            @Param("status") Integer status);
+
 
     //查询app信息列表
     List<AppInfo> getAppInfoList(@Param("softwareName") String softwareName,
                                  @Param("flatformId") Integer flatformId,
                                  @Param("categoryLevel1") Integer categoryLevel1,
                                  @Param("categoryLevel2") Integer categoryLevel2,
-                                 @Param("categoryLevel3") Integer categoryLevel3);
+                                 @Param("categoryLevel3") Integer categoryLevel3,
+                                 @Param("status") Integer status,
+                                 @Param("pageNo") Integer pageNo,
+                                 @Param("pageSize") Integer pageSize);
 
-/*
-    @Param("softwareName") String softwareName,
-    @Param("status") Integer status,
-    @Param("categoryLevel1") Integer categoryLevel1,
-    @Param("categoryLevel2") Integer categoryLevel2,
-    @Param("categoryLevel3") Integer categoryLevel3,
+    AppInfo getAppInfo(@Param(value = "id") Integer id, @Param(value = "APKName") String APKName);
 
-    @Param("devId") Integer devId,
-    @Param("pageNo") Integer pageNo,
-    @Param("softwareName") Integer pageSize*/
+    AppInfo appinfo(@Param("id") int id);
 
+    int appdelete(@Param("id") int id);
 
+    public int modify(AppInfo appInfo);
+
+    boolean updateSatus001(AppInfo appInfo);
+
+    AppInfo appinfodetal(@Param("id") int id);
+
+    int updateSatus(@Param("status") int status, @Param("id") int id);
+
+    /**
+     * 根据id查询app基础信息
+     */
+    public AppInfo getAppinfoById(@Param("id") Integer id);
+
+    /**
+     * 修改APP基础信息
+     */
+    public int appinfomodify(AppInfo info);
+
+    /**
+     * 根据appId，更新最新versionId
+     *
+     * @param versionId
+     * @param appId
+     * @return
+     * @throws Exception
+     */
+    public int updateVersionId(@Param(value = "versionId") Integer versionId, @Param(value = "id") Integer appId) throws Exception;
+
+    public int add(AppInfo appInfo) throws Exception;
 }
+

@@ -63,75 +63,78 @@
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
               <input type="text" value="${appInfo.downloads}"
-               class="form-control col-md-7 col-xs-12" readonly="readonly">
+                     class="form-control col-md-7 col-xs-12" readonly="readonly">
             </div>
           </div>
-          
+
           <div class="item form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="select">所属平台 <span class="required">*</span></label>
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="select">所属平台 <span
+                    class="required">*</span></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="text" class="form-control col-md-7 col-xs-12" 
-              	value="${appInfo.flatformName}" readonly="readonly">
-            
+              <input type="text" class="form-control col-md-7 col-xs-12"
+                     value="${appInfo.flatformName}" readonly="readonly">
+
             </div>
           </div>
           <div class="item form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="select">所属分类 <span class="required">*</span></label>
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="select">所属分类 <span
+                    class="required">*</span></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="text" class="form-control col-md-7 col-xs-12" 
-              	value="${appInfo.categoryLevel1Name} --> ${appInfo.categoryLevel2Name} --> ${appInfo.categoryLevel3Name}" readonly="readonly">
+              <input type="text" class="form-control col-md-7 col-xs-12"
+                     value="${appInfo.categoryLevel1Name} --> ${appInfo.categoryLevel2Name} --> ${appInfo.categoryLevel3Name}"
+                     readonly="readonly">
             </div>
           </div>
           <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">APP状态 <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-            	<input type="text" class="form-control col-md-7 col-xs-12" 
-              	value="${appInfo.statusName}" readonly="readonly">
+              <input type="text" class="form-control col-md-7 col-xs-12"
+                     value="${appInfo.statusName}" readonly="readonly">
             </div>
           </div>
           <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">应用简介 <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <textarea class="form-control col-md-7 col-xs-12" readonly="readonly"> 
-              ${appInfo.appInfo}</textarea>
+              <textarea class="form-control col-md-7 col-xs-12" readonly="readonly">
+                ${appInfo.appInfo}</textarea>
             </div>
           </div>
-           <div class="item form-group">
+          <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">LOGO图片 <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-			 <c:choose> 
-				  <c:when test="${appInfo.logoPicPath == null || appInfo.logoPicPath == ''}">   
-				    	暂无
-				  </c:when> 
-				  <c:otherwise>   
-				    <img src="${appInfo.logoPicPath }?m=1" width="100px;"/> 
-				  </c:otherwise> 
-              </c:choose> 
+              <c:choose>
+                <c:when test="${appInfo.logoPicPath == null || appInfo.logoPicPath == ''}">
+                  暂无
+                </c:when>
+                <c:otherwise>
+                  <img src="${pageContext.request.contextPath }/${appInfo.logoPicPath }?m=1" width="100px;"/>
+                </c:otherwise>
+              </c:choose>
             </div>
           </div>
-        	<div class="form-group">
-        		<div class="col-md-6 col-md-offset-3">
-        		<button id="status" type="submit" name="status" value="2" class="btn btn-success">审核通过</button>
-        		<button id="status" type="submit" name="status" value="3" class="btn btn-success">审核不通过</button>
-          		<button type="button" class="btn btn-primary" id="back">返回</button>
-        		</div>
-     		</div>
+          <div class="form-group">
+            <div class="col-md-6 col-md-offset-3">
+              <button id="status" type="submit" name="status" value="2" class="btn btn-success">审核通过</button>
+              <button id="status" type="submit" name="status" value="3" class="btn btn-success">审核不通过</button>
+              <button type="button" class="btn btn-primary" id="back">返回</button>
+            </div>
+          </div>
         </form>
-        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="x_title">
+        <h2>最新版本信息</h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+        </ul>
         <div class="clearfix"></div>
-        <div class="x_title">
-            <h2>最新版本信息</h2>
-            <ul class="nav navbar-right panel_toolbox">
-              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-              </li>
-            </ul>
-          <div class="clearfix"></div>
-        </div>
-        <div class="x_content" style="display: block;">
-         <br>
+      </div>
+      <div class="x_content" style="display: block;">
+        <br>
         <form class="form-horizontal form-label-left">
           <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">版本号 <span class="required">*</span>

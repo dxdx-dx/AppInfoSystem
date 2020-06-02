@@ -2,6 +2,7 @@ package cn.appsys.service.backend;
 
 import cn.appsys.pojo.AppCategory;
 import cn.appsys.pojo.AppInfo;
+import cn.appsys.pojo.AppVersion;
 import cn.appsys.pojo.DataDictionary;
 
 import java.util.List;
@@ -11,6 +12,13 @@ import java.util.List;
  * @date 2020/5/16 2:57
  */
 public interface AppService {
+
+    AppInfo appinfodetal(int id);
+
+    AppVersion appVersiondetal(int id);
+
+    int updateSatus(int status, int id);
+
     //查询所有平台名称
     List<DataDictionary> dataList();
 
@@ -23,12 +31,12 @@ public interface AppService {
     //查询信息总条数
     Integer getAppinfoCount(String softwareName, Integer flatformId,
                             Integer categoryLevel1,
-                            Integer categoryLevel2, Integer categoryLevel3);
+                            Integer categoryLevel2, Integer categoryLevel3, Integer status);
 
     //查询app信息列表
     List<AppInfo> getAppInfoList(String softwareName, Integer flatformId,
                                  Integer categoryLevel1,
-                                 Integer categoryLevel2, Integer categoryLevel3);
+                                 Integer categoryLevel2, Integer categoryLevel3, Integer status, Integer pageNo, Integer pageSize);
 /*   ,
    , Integer devId, Integer pageNo, Integer pageSize*/
 }

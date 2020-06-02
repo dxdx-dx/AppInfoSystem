@@ -6,4 +6,8 @@
     <select id="dataList" resultType="DataDictionary">
            SELECT `valueId`,`valueName` FROM  `data_dictionary` WHERE `typeCode`='APP_FLATFORM'
     </select>
+    <select id="dataList1" resultType="DataDictionary">
+             SELECT `valueId`,`valueName` FROM  `data_dictionary` WHERE `typeCode`='APP_STATUS'
+    </select>
+
 </mapper>

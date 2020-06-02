@@ -9,7 +9,7 @@ import java.util.Date;
  * @author Matrix
  * @date 2020/5/15 10:34
  */
-public class AppVersion implements Serializable {
+public class                                                    AppVersion implements Serializable {
     private Integer id;//id
     private Integer appId;//appId（来源于：app_info表的主键id）
     private String versionNo;//版本号
@@ -23,6 +23,24 @@ public class AppVersion implements Serializable {
     private Date modifyDate;//最新更新时间
     private String apkLocPath;//apk文件的服务器存储路径
     private String apkFileName;//上传的apk文件名称
+    private String statusName;
+    private String appName;
+
+    public String getStatusName() {
+        return statusName;
+    }
+
+    public void setStatusName(String statusName) {
+        this.statusName = statusName;
+    }
+
+    public String getAppName() {
+        return appName;
+    }
+
+    public void setAppName(String appName) {
+        this.appName = appName;
+    }
 
     @Override
     public String toString() {
