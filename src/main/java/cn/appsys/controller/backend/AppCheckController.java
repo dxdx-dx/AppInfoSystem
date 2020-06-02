@@ -29,6 +29,9 @@ public class AppCheckController {
     @Resource
     private AppService appService;
 
+    /**
+     * 获得app列表
+     */
     @RequestMapping("/list")
     public String userList(@RequestParam(value = "pageIndex", required = false) String pageIndex,
                            @RequestParam(value = "querySoftwareName", required = false) String querySoftwareName,
@@ -77,10 +80,10 @@ public class AppCheckController {
         pageSupport.setCurrentPageNo(_pageIndex);
         //查询总条数
         int tatalCount = appService.getAppinfoCount(querySoftwareName, _queryFlatformId,
-                _queryCategoryLevel1, _queryCategoryLevel2, _queryCategoryLevel3, 0);
+                _queryCategoryLevel1, _queryCategoryLevel2, _queryCategoryLevel3, 1);
         pageSupport.setTotalCount(tatalCount);
         List<AppInfo> appInfoList = appService.getAppInfoList(querySoftwareName, _queryFlatformId,
-                _queryCategoryLevel1, _queryCategoryLevel2, _queryCategoryLevel3, 0, pageSupport.getCurrentPageNo(), Constants.PAGE_SIZE);
+                _queryCategoryLevel1, _queryCategoryLevel2, _queryCategoryLevel3, 1, pageSupport.getCurrentPageNo(), Constants.PAGE_SIZE);
         List<DataDictionary> dataDictionaryList = appService.dataList();
         List<AppCategory> categoryLevel1List = appService.getCategoryLevel1();
         List<AppCategory> categoryLevel2List = appService.getCategoryLevel2(_queryCategoryLevel1);
@@ -118,6 +121,9 @@ public class AppCheckController {
         return JSONArray.toJSONString(categoryLevel1List);
     }
 
+    /**
+     * 跳转app审核页面
+     */
     @RequestMapping("/check")
     public String check(@RequestParam(value = "aid", required = false) Integer aid,
                         @RequestParam(value = "vid", required = false) Integer vid,
@@ -131,6 +137,10 @@ public class AppCheckController {
         return "/backend/appcheck";
     }
 
+    /**
+     * APP审核操作
+     * n
+     */
     @RequestMapping("/checksave")
     public String checksave(@RequestParam(value = "status", required = false) Integer status,
                             @RequestParam(value = "id", required = false) Integer id) {
@@ -144,8 +154,4 @@ public class AppCheckController {
         return "backendApp/check";
     }
 
-    @RequestMapping("/passwordmodify")
-    public String passwordmodify(Model model) {
-        return "backend/passwordmodify";
-    }
 }

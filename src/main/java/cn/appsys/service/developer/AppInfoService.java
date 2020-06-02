@@ -10,31 +10,24 @@ import java.util.List;
  */
 public interface AppInfoService {
 
-    /**
-     * 新增app
-     *
-     * @param appInfo
-     * @return
-     * @throws Exception
-     */
-    public boolean add(AppInfo appInfo) throws Exception;
+    //新增app
+    boolean add(AppInfo appInfo) throws Exception;
 
     // 根据id、apkName查找appInfo
     AppInfo getAppInfo(Integer id, String APKName) throws Exception;
 
-    /**
-     * 根据id查询app基础信息
-     */
-    public AppInfo getAppinfoById(Integer id);
+    //根据id查询app基础信息
 
-    /**
-     * 修改app基础信息
-     */
-    public int appinfomodify(AppInfo info);
+    AppInfo getAppinfoById(Integer id);
+
+    //修改app基础信息
+
+    int appinfomodify(AppInfo info);
 
     //修改状态（上下架）
     boolean updateSatus(AppInfo appInfo) throws Exception;
 
+    //根据id获取信息
     AppInfo appinfo(int id);
 
     //删除信息

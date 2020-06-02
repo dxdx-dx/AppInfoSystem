@@ -31,16 +31,25 @@ public class AppServiceImpl implements AppService {
     @Resource
     private AppCategoryMapper appCategoryMapper;
 
+    /**
+     * 查询一级分类
+     */
     @Override
     public List<AppCategory> getCategoryLevel1() {
         return appCategoryMapper.getCategoryLevel1();
     }
 
+    /**
+     * 查询二,三级分类
+     */
     @Override
     public List<AppCategory> getCategoryLevel2(Integer parentId) {
         return appCategoryMapper.getCategoryLevel2(parentId);
     }
 
+    /**
+     * 查询信息总条数
+     */
     @Override
     public Integer getAppinfoCount(String softwareName, Integer flatformId,
                                    Integer categoryLevel1,
@@ -49,27 +58,41 @@ public class AppServiceImpl implements AppService {
                 categoryLevel1, categoryLevel2, categoryLevel3, status);
     }
 
+    /**
+     * 根据id获取app详情
+     */
     @Override
     public AppInfo appinfodetal(int id) {
         return appInfoMapper.appinfodetal(id);
     }
 
+    /**
+     * 根据id获取版本详情
+     */
     @Override
     public AppVersion appVersiondetal(int id) {
         return appVersionMapper.appVersiondetal(id);
     }
 
+    /**
+     * 上下架
+     */
     @Override
     public int updateSatus(int status, int id) {
         return appInfoMapper.updateSatus(status, id);
     }
 
+    /**
+     * 查询所有平台名称
+     */
     @Override
     public List<DataDictionary> dataList() {
         return dataDictionaryMapper.dataList();
     }
 
-
+    /**
+     * 查询app信息列表
+     */
     @Override
     public List<AppInfo> getAppInfoList(String softwareName, Integer flatformId,
                                         Integer categoryLevel1,
@@ -78,8 +101,6 @@ public class AppServiceImpl implements AppService {
         List<AppInfo> appInfoList = null;
         appInfoList = appInfoMapper.getAppInfoList(softwareName, flatformId,
                 categoryLevel1, categoryLevel2, categoryLevel3, status, (pageNo - 1) * pageSize, pageSize);
-       /* softwareName, status, categoryLevel1, categoryLevel2,
-                categoryLevel3, flatformId, devId, (pageNo - 1) * Constants.PAGE_SIZE, pageSize)*/
         return appInfoList;
     }
 }

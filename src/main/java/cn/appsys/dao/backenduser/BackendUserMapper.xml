@@ -3,9 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.appsys.dao.backenduser.BackendUserMapper">
+
+    <!--根据UserCode查询用户-->
     <select id="findByUserCode" resultType="BackendUser">
-SELECT u.* , dic.`valueName` AS userTypeName FROM `backend_user` u,
-`data_dictionary` dic  WHERE  u.`userType`=dic.`valueId` AND
-dic.`typeCode`='USER_TYPE'  AND  `userCode`=#{userCode}
+        SELECT u.* , dic.`valueName` AS userTypeName FROM `backend_user` u,
+        `data_dictionary` dic  WHERE  u.`userType`=dic.`valueId` AND
+        dic.`typeCode`='USER_TYPE'  AND  `userCode`=#{userCode}
     </select>
 </mapper>

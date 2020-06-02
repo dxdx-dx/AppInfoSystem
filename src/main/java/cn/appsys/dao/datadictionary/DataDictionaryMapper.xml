@@ -3,9 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.appsys.dao.datadictionary.DataDictionaryMapper">
+
+    <!--查询所有平台名称-->
     <select id="dataList" resultType="DataDictionary">
            SELECT `valueId`,`valueName` FROM  `data_dictionary` WHERE `typeCode`='APP_FLATFORM'
     </select>
+
+    <!--查询所有状态-->
     <select id="dataList1" resultType="DataDictionary">
              SELECT `valueId`,`valueName` FROM  `data_dictionary` WHERE `typeCode`='APP_STATUS'
     </select>

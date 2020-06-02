@@ -4,9 +4,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.appsys.dao.appversion.AppVersionMapper">
 
+    <!--根据id查询信息-->
     <select id="getAppVersionById" resultType="AppVersion">
 		select * from app_version where id = #{id}
 	</select>
+
+    <!--根据appid获取信息-->
     <select id="getAppVersionList" resultType="AppVersion">
         select v.*,
         (select a.softwareName from app_info a where a.id=v.appId ) as appName,
@@ -20,9 +23,13 @@
         </trim>
         order by v.creationDate DESC
     </select>
+
+    <!--根据id查询信息-->
     <select id="appVersiondetal" resultType="AppVersion">
-SELECT *  FROM  `app_version` WHERE id =#{id}
+        SELECT *  FROM  `app_version` WHERE id =#{id}
     </select>
+
+    <!--修改信息-->
     <update id="modify" parameterType="AppVersion">
         update app_version
         <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
@@ -37,16 +44,20 @@ SELECT *  FROM  `app_version` WHERE id =#{id}
             <if test="modifyDate != null">modifyDate=#{modifyDate},</if>
         </trim>
     </update>
+
+    <!--根据id查询列表-->
     <select id="appVersion" resultType="AppVersion">
         SELECT v.*,(SELECT `softwareName` FROM `app_info` WHERE v.`appId`=id ) AS appName,(SELECT `valueName` FROM `data_dictionary`
         WHERE v.`publishStatus`=`valueId` AND `typeCode`="PUBLISH_STATUS") AS statusName
           FROM `app_version` v WHERE `appId`=#{id}
-    </select>  <!-- 修改app信息（修改状态） -->
+    </select>
+
+    <!-- 修改app信息（修改状态） -->
     <update id="modifystatus">
 		UPDATE app_info ai SET ai.`status` = #{status} where id = #{id}
 	</update>
 
-
+    <!--添加-->
     <insert id="add" parameterType="AppVersion" useGeneratedKeys="true" keyProperty="id">
 		insert into app_version (appId,versionNo,versionInfo,publishStatus,
 								downloadLink,versionSize,apkLocPath,apkFileName,createdBy,creationDate)

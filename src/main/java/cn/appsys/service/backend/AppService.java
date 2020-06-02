@@ -13,10 +13,13 @@ import java.util.List;
  */
 public interface AppService {
 
+    //根据id获取app详情
     AppInfo appinfodetal(int id);
 
+    //根据id获取版本详情
     AppVersion appVersiondetal(int id);
 
+    //上下架
     int updateSatus(int status, int id);
 
     //查询所有平台名称
@@ -37,6 +40,4 @@ public interface AppService {
     List<AppInfo> getAppInfoList(String softwareName, Integer flatformId,
                                  Integer categoryLevel1,
                                  Integer categoryLevel2, Integer categoryLevel3, Integer status, Integer pageNo, Integer pageSize);
-/*   ,
-   , Integer devId, Integer pageNo, Integer pageSize*/
 }

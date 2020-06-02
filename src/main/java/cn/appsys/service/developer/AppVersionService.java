@@ -10,47 +10,21 @@ import java.util.List;
  */
 public interface AppVersionService {
 
-
-    /**
-     * 新增app版本信息，并更新app_info表的versionId字段
-     *
-     * @param appVersion
-     * @return
-     * @throws Exception
-     */
+    //新增app版本信息，并更新app_info表的versionId字段
     public boolean appsysadd(AppVersion appVersion) throws Exception;
 
-    /**
-     * 修改app信息（修改状态）
-     */
+    //修改app信息（修改状态）
     int modifystatus(Integer status, Integer id);
 
+    //根据id获取版本信息
     List<AppVersion> appVersion(int id);
 
-    /**
-     * 修改app版本信息
-     *
-     * @param appVersion
-     * @return
-     * @throws Exception
-     */
+    //修改app版本信息
     boolean modify(AppVersion appVersion) throws Exception;
 
-    /**
-     * 根据appId查询相应的app版本列表
-     *
-     * @param appId
-     * @return
-     * @throws Exception
-     */
+    //根据appId查询相应的app版本列表
     List<AppVersion> getAppVersionList(Integer appId) throws Exception;
 
-    /**
-     * 根据id获取AppVersion
-     *
-     * @param id
-     * @return
-     * @throws Exception
-     */
+    //根据id获取AppVersion
     AppVersion getAppVersionById(Integer id) throws Exception;
 }

@@ -17,6 +17,9 @@ public class BackendUserServiceImpl implements BackendUserService {
     @Resource
     private BackendUserMapper backendUserMapper;
 
+    /**
+     * 登陆
+     */
     @Override
     public BackendUser login(String userCode, String password) {
         BackendUser backendUser = null;

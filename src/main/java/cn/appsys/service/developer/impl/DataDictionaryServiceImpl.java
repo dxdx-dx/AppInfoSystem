@@ -18,11 +18,17 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
     @Resource
     private DataDictionaryMapper dataDictionaryMapper;
 
+    /**
+     * 查询所有平台名称
+     */
     @Override
     public List<DataDictionary> dataList() {
         return dataDictionaryMapper.dataList();
     }
 
+    /**
+     * 查询所有状态
+     */
     @Override
     public List<DataDictionary> dataList1() {
         return dataDictionaryMapper.dataList1();

@@ -4,14 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.appsys.dao.appInfo.AppInfoMapper">
 
-
+    <!--根据appId，更新最新versionId-->
     <update id="updateVersionId">
 		update app_info
 			set versionId=#{versionId}
 			where id = #{id}
 	</update>
 
-
+    <!--添加信息-->
     <insert id="add" parameterType="AppInfo">
 		insert into app_info (softwareName,APKName,supportROM,interfaceLanguage,updateDate,softwareSize,
 							devId,appInfo,status,onSaleDate,offSaleDate,categoryLevel1,categoryLevel2,
@@ -21,7 +21,6 @@
 					   #{categoryLevel1},#{categoryLevel2},#{categoryLevel3},#{downloads},
 					   #{flatformId},#{logoPicPath},#{logoLocPath},#{createdBy},#{creationDate})
 	</insert>
-
 
     <!-- 根据id查询app基础信息 -->
     <select id="getAppinfoById" resultType="AppInfo" parameterType="Integer">
@@ -56,6 +55,8 @@
         </set>
         WHERE id = #{id}
     </update>
+
+    <!--根据id询信息-->
     <select id="appinfo" resultType="AppInfo">
         SELECT i.`id`,i.`softwareName`,i.`APKName`,i.`supportROM`,i.`interfaceLanguage`,
         i.`softwareSize`,i.`updateDate`,i.`devId`,i.`appInfo`,i.`status`,i.`onSaleDate`,
@@ -79,6 +80,7 @@
         </trim>
     </select>
 
+    <!--查询app信息列表-->
     <select id="getAppInfoList" resultType="AppInfo">
         SELECT i.`id`,i.`softwareName`,i.`APKName`,i.`supportROM`,i.`interfaceLanguage`,
         i.`softwareSize`,i.`updateDate`,i.`devId`,i.`appInfo`,i.`status`,i.`onSaleDate`,
@@ -117,6 +119,8 @@
         </trim>
         order by creationDate DESC limit #{pageNo},#{pageSize}
     </select>
+
+    <!--查询信息总条数-->
     <select id="getAppinfoCount" resultType="Integer">
         SELECT COUNT(1) FROM `app_info`
         <trim prefix="where" prefixOverrides="and | or">
@@ -140,6 +144,8 @@
             </if>
         </trim>
     </select>
+
+    <!--根据id或者apk名称查询信息-->
     <select id="getAppInfo" resultType="AppInfo">
         select * ,
         (select devName from dev_user where id = a.devId) as devName,
@@ -160,6 +166,8 @@
             </if>
         </trim>
     </select>
+
+    <!--查询app信息-->
     <select id="appinfodetal" resultType="AppInfo">
         SELECT i.`id`,i.`softwareName`,i.`APKName`,i.`supportROM`,i.`interfaceLanguage`,
         i.`softwareSize`,i.`updateDate`,i.`devId`,i.`appInfo`,i.`status`,i.`onSaleDate`,
@@ -182,15 +190,21 @@
             </if>
         </trim>
     </select>
+
+    <!--根据id删除信息-->
     <delete id="appdelete">
         DELETE FROM app_info
         WHERE id = #{id}
     </delete>
+
+    <!--修改状态-->
     <update id="updateSatus">
         update app_info
 			set status=#{status}
 			where id = #{id}
     </update>
+
+    <!--修改信息-->
     <update id="modify" parameterType="AppInfo">
         update app_info
         <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
@@ -215,23 +229,4 @@
             <if test="modifyDate != null">modifyDate=#{modifyDate},</if>
         </trim>
     </update>
-    <!--
-     <if test="status != null">
-           and a.status = #{status}
-       </if>
-       <if test="categoryLevel1 != null">
-           and a.categoryLevel1 = #{categoryLevel1}
-       </if>
-       <if test="categoryLevel2 != null">
-           and a.categoryLevel2 = #{categoryLevel2}
-       </if>
-       <if test="categoryLevel3 != null">
-           and a.categoryLevel3 = #{categoryLevel3}
-       </if>
-
-       <if test="devId != null">
-           and a.devId = #{devId}
-       </if>
-        limit #{from},#{pageSize}
-   -->
 </mapper>

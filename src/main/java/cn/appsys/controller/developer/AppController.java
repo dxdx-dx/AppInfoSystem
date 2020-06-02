@@ -26,6 +26,8 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
+ * 开发者功能控制类
+ *
  * @author Matrix
  * @date 2020/5/16 2:52
  */
@@ -41,12 +43,8 @@ public class AppController {
     @Resource
     private AppVersionService appVersionService;
 
-
     /**
      * 验证apk名称是否存在
-     *
-     * @param APKName
-     * @return
      */
     @RequestMapping(value = "apkexist.json", method = RequestMethod.GET)
     @ResponseBody
@@ -72,8 +70,6 @@ public class AppController {
 
     /**
      * 新增App基础信息
-     *
-     * @return
      */
     @RequestMapping(value = "appinfoadd", method = RequestMethod.GET)
     public String appinfoadd(Model model) {
@@ -86,10 +82,6 @@ public class AppController {
 
     /**
      * 保存新增appInfo（主表）的数据
-     *
-     * @param appInfo
-     * @param session
-     * @return
      */
     @RequestMapping(value = "/appinfoaddsave", method = RequestMethod.POST)
     public String addSave(
@@ -97,7 +89,6 @@ public class AppController {
             HttpSession session,
             HttpServletRequest request,
             @RequestParam(value = "a_logoPicPath", required = false) MultipartFile attach) {
-
         String logoPicPath = null;
         String logoLocPath = null;
         if (!attach.isEmpty()) {
@@ -125,7 +116,6 @@ public class AppController {
                 try {
                     attach.transferTo(targetFile);
                 } catch (Exception e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                     request.setAttribute("fileUploadError",
                             Constants.FILEUPLOAD_ERROR_2);
@@ -153,7 +143,6 @@ public class AppController {
                 return "redirect:/devApp/list";
             }
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return "developer/appinfoadd";
@@ -179,6 +168,9 @@ public class AppController {
         return "developer/appversionadd";
     }
 
+    /**
+     * 添加app版本信息
+     */
     @RequestMapping(value = "/addversionsave", method = RequestMethod.POST)
     public String addVersionSave(
             AppVersion appVersion,
@@ -239,21 +231,14 @@ public class AppController {
                 return "redirect:/devApp/list";
             }
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return "redirect:/devApp/appversionadd?id="
                 + appVersion.getAppId();
     }
 
-
     /**
      * 修改最新的appVersion信息（跳转到修改appVersion页面）
-     *
-     * @param versionId
-     * @param appId
-     * @param model
-     * @return
      */
     @RequestMapping(value = "/appversionmodify", method = RequestMethod.GET)
     public String modifyAppVersion(@RequestParam("vid") String versionId,
@@ -277,7 +262,6 @@ public class AppController {
                 System.out.println(a + "*************************************************************");
             }
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         model.addAttribute(appVersion);
@@ -288,21 +272,15 @@ public class AppController {
 
     /**
      * 保存修改后的appVersion
-     *
-     * @param appVersion
-     * @param session
-     * @return
      */
     @RequestMapping(value = "/appversionmodifysave", method = RequestMethod.POST)
     public String modifyAppVersionSave(AppVersion appVersion, HttpSession session, HttpServletRequest request,
                                        @RequestParam(value = "attach", required = false) MultipartFile attach) {
-
         String downloadLink = null;
         String apkLocPath = null;
         String apkFileName = null;
         if (!attach.isEmpty()) {
             String path = request.getSession().getServletContext().getRealPath("statics" + File.separator + "uploadfiles");
-//            logger.info("uploadFile path: " + path);
             String oldFileName = attach.getOriginalFilename();//原文件名
             String prefix = FilenameUtils.getExtension(oldFileName);//原文件后缀
             if (prefix.equalsIgnoreCase("apk")) {//apk文件命名：apk名称+版本号+.apk
@@ -310,7 +288,6 @@ public class AppController {
                 try {
                     apkName = appInfoService.getAppInfo(appVersion.getAppId(), null).getAPKName();
                 } catch (Exception e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
                 if (apkName == null || "".equals(apkName)) {
@@ -326,7 +303,6 @@ public class AppController {
                 try {
                     attach.transferTo(targetFile);
                 } catch (Exception e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                     return "redirect:/devApp/appversionmodify?vid=" + appVersion.getId()
                             + "&aid=" + appVersion.getAppId()
@@ -350,12 +326,14 @@ public class AppController {
                 return "redirect:/devApp/list";
             }
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return "developer/appversionmodify";
-    }//ajax查询所属平台下拉框
+    }
 
+    /**
+     * ajax查询所属平台下拉框
+     */
     @RequestMapping(value = "datadictionarylist.json", method = RequestMethod.GET)
     @ResponseBody
     public Object Platform() {
@@ -364,7 +342,9 @@ public class AppController {
         return JSON.toJSONString(dictionariesList);
     }
 
-    //ajax联动分类下拉框
+    /**
+     * ajax联动分类下拉框
+     */
     @RequestMapping(value = "categorylevellist.json", method = RequestMethod.GET)
     @ResponseBody
     public Object Classification(@RequestParam String pid) {
@@ -377,7 +357,9 @@ public class AppController {
         return JSON.toJSONString(categoriesList);
     }
 
-    //app基础信息修改页面(待审核状态)
+    /**
+     * app基础信息修改页面(待审核状态)
+     */
     @RequestMapping(value = "/appinfomodeify.html", method = RequestMethod.GET)
     public String appinfomodeify(@RequestParam Integer id, Model model) {
         AppInfo info = appInfoService.getAppinfoById(id);
@@ -389,7 +371,9 @@ public class AppController {
         return "developer/appinfomodify";
     }
 
-    //修改app基础信息方法
+    /**
+     * 修改app基础信息方法n
+     */
     @RequestMapping(value = "/appinfomodifysave.html", method = RequestMethod.POST)
     public String appinfomodeifySave(AppInfo appinfo, HttpSession session, HttpServletRequest request,
                                      @RequestParam(value = "attach", required = false) MultipartFile attach,
@@ -402,8 +386,8 @@ public class AppController {
             // 定义上传的目标路径
 			/*String path = request.getSession().getServletContext()
 					.getRealPath("statics" + File.separator + "uploadfiles");*/
-            String path = "E:\\workspace_s2\\AppInfoSystem\\WebContent\\statics\\uploadfiles";
-
+          //  String path = "E:\\workspace_s2\\AppInfoSystem\\WebContent\\statics\\uploadfiles";
+ String path ="G:\\AppInfoSystem\\src\\main\\webapp\\statics\\uploadfiles"
             // 获取原文件名
             String oldFileName = attach.getOriginalFilename();
 
@@ -449,7 +433,6 @@ public class AppController {
                 return "jsp/useradd";
             }
         }
-
         //更新者
         appinfo.setModifyBy(((DevUser) session.getAttribute(Constants.DEVUSER_SESSION)).getId());
         //更新时间
@@ -457,14 +440,12 @@ public class AppController {
         //图片路径
         appinfo.setLogoPicPath(idTocPath);
         appinfo.setLogoLocPath(idPicPath);
-
         int count = appInfoService.appinfomodify(appinfo);
         if (count > 0) {
             //判断提交是否需要审核
             //logger.debug("=====>提交并审核状态：" + appinfo.getStatus());
             if (status == 1) {
                 if (appVersionService.modifystatus(appinfo.getStatus(), appinfo.getId()) > 0) {
-
                 } else {
                     return "redirect:/devApp/appinfomodeify.html";
                 }
@@ -474,11 +455,11 @@ public class AppController {
         } else {
             return "redirect:/devApp/appinfomodeify.html";
         }
-
-
     }
 
-
+    /**
+     * 查看app详细信息
+     */
     @RequestMapping("appview/{id}")
     public String view(@PathVariable Integer id, Model model) {
         List<AppVersion> appVersionList = appVersionService.appVersion(id);
@@ -490,8 +471,6 @@ public class AppController {
 
     /**
      * 刪除功能
-     *
-     * @return
      */
     @RequestMapping(value = "/delapp.json")
     @ResponseBody
@@ -518,6 +497,9 @@ public class AppController {
         return JSONArray.toJSONString(resultMap);
     }
 
+    /**
+     * 上下架
+     */
     @RequestMapping(value = "/{appid}/sale", method = RequestMethod.PUT)
     @ResponseBody
     public Object upSatus(@PathVariable String appid, HttpSession session) {
@@ -550,6 +532,9 @@ public class AppController {
         return resultMap;
     }
 
+    /**
+     * APP列表信息
+     */
     @RequestMapping("list")
     public String list(@RequestParam(value = "pageIndex", required = false) String pageIndex,
                        @RequestParam(value = "querySoftwareName", required = false) String querySoftwareName,
@@ -562,7 +547,6 @@ public class AppController {
         if (querySoftwareName == null) {
             querySoftwareName = "";
         }
-
         int _queryFlatformId;
         if (queryFlatformId == null || queryFlatformId.equals("")) {
             _queryFlatformId = 0;
@@ -621,8 +605,6 @@ public class AppController {
         model.addAttribute("appInfoList", appInfoList);
         model.addAttribute("pages", pageSupport);
         model.addAttribute("querySoftwareName", querySoftwareName);
-
-
         model.addAttribute("queryStatus", queryStatus);
         model.addAttribute("querySoftwareName", querySoftwareName);
         model.addAttribute("queryFlatformId", queryFlatformId);
@@ -643,12 +625,9 @@ public class AppController {
     @RequestMapping("/categorylevellist")
     @ResponseBody
     public String logout(@RequestParam(value = "pid", required = true) String pid, Model model) {
-        //System.out.println(pid);
+
         Integer parentId = Integer.valueOf(pid);
         List<AppCategory> categoryLevel1List = appCategoryService.getCategoryLevel2(parentId);
-       /* for (AppCategory app : categoryLevel1List) {
-            System.out.println(app);
-        }*/
         return JSONArray.toJSONString(categoryLevel1List);
     }
 }

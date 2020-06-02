@@ -18,6 +18,9 @@ public class DevUserServiceImpl implements DevUserService {
     @Resource
     private DevUserMapper devUserMapper;
 
+    /**
+     * 登陆
+     */
     @Override
     public DevUser devLogin(String devCode, String devPassword) {
         DevUser devUser = null;

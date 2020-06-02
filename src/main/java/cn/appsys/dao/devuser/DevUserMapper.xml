@@ -3,7 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.appsys.dao.devuser.DevUserMapper">
+
+    <!--根据UserCode查询用户-->
     <select id="findBydevCode" resultType="DevUser">
-SELECT *  FROM `dev_user` WHERE `devCode`=#{devCode}
-</select>
+        SELECT *  FROM `dev_user` WHERE `devCode`=#{devCode}
+    </select>
 </mapper>

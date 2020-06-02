@@ -73,7 +73,7 @@
                                     class="fa fa-chevron-down"></span>
                             </a>
                                 <ul class="nav child_menu">
-                                    <li><a href="www.baidu.com">个人账户信息维护</a>
+                                    <li><a href="javascript:;">个人账户信息维护</a>
                                     </li>
                                 </ul>
                             </li>

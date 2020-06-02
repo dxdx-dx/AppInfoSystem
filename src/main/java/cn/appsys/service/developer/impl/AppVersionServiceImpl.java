@@ -20,10 +20,11 @@ public class AppVersionServiceImpl implements AppVersionService {
     @Resource
     private AppInfoMapper appInfoMapper;
 
-
+    /**
+     * 新增app版本信息，并更新app_info表的versionId字段
+     */
     @Override
     public boolean appsysadd(AppVersion appVersion) throws Exception {
-        // TODO Auto-generated method stub
         boolean flag = false;
         Integer versionId = null;
         if (appVersionMapper.add(appVersion) > 0) {
@@ -36,6 +37,9 @@ public class AppVersionServiceImpl implements AppVersionService {
         return flag;
     }
 
+    /**
+     * 修改app版本信息
+     */
     @Override
     public boolean modify(AppVersion appVersion) throws Exception {
         boolean flag = false;
@@ -45,11 +49,17 @@ public class AppVersionServiceImpl implements AppVersionService {
         return flag;
     }
 
+    /**
+     * 根据appId查询相应的app版本列表
+     */
     @Override
     public List<AppVersion> getAppVersionList(Integer appId) throws Exception {
         return appVersionMapper.getAppVersionList(appId);
     }
 
+    /**
+     * 根据id获取AppVersion
+     */
     @Override
     public AppVersion getAppVersionById(Integer id) throws Exception {
         return appVersionMapper.getAppVersionById(id);
@@ -63,6 +73,9 @@ public class AppVersionServiceImpl implements AppVersionService {
         return appVersionMapper.modifystatus(status, id);
     }
 
+    /**
+     * 根据id获取版本信息
+     */
     @Override
     public List<AppVersion> appVersion(int id) {
         return appVersionMapper.appVersion(id);

@@ -32,10 +32,12 @@ public class AppInfoServiceImpl implements AppInfoService {
      * 根据id查询app基础信息
      */
     public AppInfo getAppinfoById(Integer id) {
-        // TODO Auto-generated method stub
         return appInfoMapper.getAppinfoById(id);
     }
 
+    /**
+     * 新增app
+     */
     @Override
     public boolean add(AppInfo appInfo) throws Exception {
         boolean flag = false;
@@ -45,6 +47,9 @@ public class AppInfoServiceImpl implements AppInfoService {
         return flag;
     }
 
+    /**
+     * 根据id、apkName查找appInfo
+     */
     @Override
     public AppInfo getAppInfo(Integer id, String APKName) throws Exception {
         return appInfoMapper.getAppInfo(id, APKName);
@@ -59,6 +64,9 @@ public class AppInfoServiceImpl implements AppInfoService {
         return appInfoMapper.appinfomodify(info);
     }
 
+    /**
+     * 修改状态（上下架）
+     */
     @Override
     public boolean updateSatus(AppInfo appInfoObj) throws Exception {
         Integer operator = appInfoObj.getModifyBy();
@@ -85,8 +93,6 @@ public class AppInfoServiceImpl implements AppInfoService {
 
     /**
      * 刪除
-     *
-     * @return
      */
     @Override
     public boolean appdelete(int id) {
@@ -100,13 +106,7 @@ public class AppInfoServiceImpl implements AppInfoService {
     }
 
     /**
-     * on Sale
-     *
-     * @param appInfo
-     * @param operator
-     * @param appInfStatus
-     * @param versionStatus
-     * @throws Exception
+     * 上架
      */
     private void onSale(AppInfo appInfo, Integer operator, Integer appInfStatus, Integer versionStatus) throws Exception {
         offSale(appInfo, operator, appInfStatus);
@@ -114,13 +114,7 @@ public class AppInfoServiceImpl implements AppInfoService {
     }
 
     /**
-     * offSale
-     *
-     * @param appInfo
-     * @param operator
-     * @param appInfStatus
-     * @return
-     * @throws Exception
+     * 下架
      */
     private boolean offSale(AppInfo appInfo, Integer operator, Integer appInfStatus) throws Exception {
         AppInfo _appInfo = new AppInfo();
@@ -133,12 +127,7 @@ public class AppInfoServiceImpl implements AppInfoService {
     }
 
     /**
-     * set sale method to on or off
-     *
-     * @param appInfo
-     * @param operator
-     * @return
-     * @throws Exception
+     * 设置上下架
      */
     private boolean setSaleSwitchToAppVersion(AppInfo appInfo, Integer operator, Integer saleStatus) throws Exception {
         AppVersion appVersion = new AppVersion();
@@ -150,7 +139,9 @@ public class AppInfoServiceImpl implements AppInfoService {
         return false;
     }
 
-
+    /**
+     * 查询信息总条数
+     */
     @Override
     public Integer getAppinfoCount(String softwareName, Integer flatformId,
                                    Integer categoryLevel1, Integer categoryLevel2,
@@ -159,6 +150,9 @@ public class AppInfoServiceImpl implements AppInfoService {
                 categoryLevel2, categoryLevel3, status);
     }
 
+    /**
+     * 查询app信息列表
+     */
     @Override
     public List<AppInfo> getAppInfoList(String softwareName, Integer flatformId,
                                         Integer categoryLevel1, Integer categoryLevel2,

@@ -17,12 +17,17 @@ public class AppCategoryServiceImpl implements AppCategoryService {
     @Resource
     private AppCategoryMapper appCategoryMapper;
 
-
+    /**
+     * 查询一级分类
+     */
     @Override
     public List<AppCategory> getCategoryLevel1() {
         return appCategoryMapper.getCategoryLevel1();
     }
 
+    /**
+     * 查询二,三级分类
+     */
     @Override
     public List<AppCategory> getCategoryLevel2(Integer parentId) {
         return appCategoryMapper.getCategoryLevel2(parentId);
